@@ -11,7 +11,10 @@
   <script type="text/javascript" language="javascript" charset="utf-8">
       //<![CDATA[
     $(document).ready(function() {
-      $(document).handlebarHelper();
+      $(document).handlebarHelper(function() {
+        console.log('it worked!!')
+        console.log($.handlebarTemplates.main);
+      });
     })
   //]]>
   </script>
