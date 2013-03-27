@@ -8,15 +8,17 @@
   <script src="/lib/handlebar-helper.js" type="text/javascript"></script>
   <script src="/helper-templates.hbs" type="text/handlebar-partials"></script>
   <script src="/main.hbs" type="text/x-handlebars-template"></script>
-  <script type="text/javascript" language="javascript" charset="utf-8">
-      //<![CDATA[
+  <script type="text/javascript">
+
     $(document).ready(function() {
       $(document).handlebarHelper(function() {
         console.log('it worked!!')
-        console.log($.handlebarTemplates.main);
+        var $html = $.handlebarTemplates.partials.index({
+            message: "hello welcome to handlebar helper!!",
+            });
+        $('body').append($html);
       });
     })
-  //]]>
   </script>
 </head>
 <body>
