@@ -42,7 +42,7 @@ in this case the type="text/handlebar-partials" marks the file for additional pa
 The name after the ? in the top indicates the name the template will have in
 the partials namespace and can be accessed at the handlebarTemplates namespace
 under jquery.
-```html
+```javascript
 	$(document).autoBars(function() {
 		/* you pass a callback in to perform work on the templates
 		becasuse handlebar helper is making multiple aynchrous requests
