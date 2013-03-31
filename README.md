@@ -16,7 +16,7 @@ This plugin makes the distinction between partials files (which
 can hold multiple handlebars templates) and full templates which are one
 per file.
 
-You can load a handlebar template to load into $.handlebarTemplates.["compiled template"]
+You can load a handlebar template to load into $.handlebarTemplates["compiled template"]
 with the script tag.
 
 ```html
