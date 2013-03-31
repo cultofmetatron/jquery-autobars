@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+  <title>jQuery AutoBars</title>
+
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/src/jquery-autobars.js" type="text/javascript"></script>
+  <script src="/helper-templates.hbs" type="text/handlebar-partials"></script>
+  <script src="/main.hbs" type="text/x-handlebars-template"></script>
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+      $(document).autoBars(function() {
+        console.log('it worked!!')
+        var $html = $.handlebarTemplates.partials.index({
+            message: "hello welcome to handlebar helper!!",
+            });
+        $('body').append($html);
+      });
+    })
+  </script>
+</head>
+<body>
+  <h1 id="header">minimalisticly awesome</h1>
+  <p> minimalisticic templating on steroids</p>
+
+
+</body>
+
+
