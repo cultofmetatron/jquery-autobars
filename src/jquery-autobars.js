@@ -6,13 +6,15 @@
  *
  *
  *       <!--#?end-->
- */
+ *
+ * Created by Peter de Croos (Cultofmetatron)
+ * blog.peterdecroos.com
+ * /
 
 (function($) {
   methods = {
 
     initialize: function() {
-        //console.log('this');
 
     },
     parsePartials:function(data){
@@ -59,7 +61,6 @@
           jQuery.handlebarTemplates[name] = Handlebars.compile(data);
         }));
       });
-      console.log('main templates', pipe);
       return pipe;
     },
     partials:  function(context) {
@@ -76,12 +77,10 @@
         }));
       });
 
-      console.log('partials', pipe)
 
       return pipe;
     },
   };
-  //heres where it begins
   jQuery.fn.autoBars = function(options, callback) {
     args = Array.prototype.slice.call(arguments, 0);
     if (args.length = 1 && typeof(args[0]) == 'function') {
@@ -100,7 +99,6 @@
     var partialPromises   = methods.partials(this);
     var templatesPromises = methods.mainTemplates(this);
     var promises = partialPromises.concat(templatesPromises);
-    console.log(promises);
 
     // we delay exection of the callback until all the promises are fullfilled!!
     if (typeof(callback) === 'function') {
@@ -113,7 +111,5 @@
 
   jQuery.fn.hbh = jQuery.fn.handlebarHelper
 })(jQuery);
-
-
 
 
