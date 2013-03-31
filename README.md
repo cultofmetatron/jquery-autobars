@@ -21,7 +21,7 @@ with the script tag.
 
 ```html
 	<script src="/main.hbs" type="text/x-handlebars-template"></script>
-
+```
 Autobars looks at the src and downloads the code as needed, compiles it into
 a handlebars template and adds the method to the $.handlebarTemplates space where you can use it in your projects!!
 
@@ -31,12 +31,12 @@ A partials file contains several handlebar template source files and are between
 	<!--#?index-->
 	  handlebars code goes here
 	<!--#?end-->
-
+```
 Handlebars helper knows its a a partials file via a script tag with type
 
 ```html
 	<script src="/helper-templates.hbs" type="text/handlebar-partials"></script>
-
+```
 in this case the type="text/handlebar-partials" marks the file for additional parsing.
 
 The name after the ? in the top indicates the name the template will have in
@@ -55,6 +55,6 @@ under jquery.
         });
         $('body').append($html);
       });
-
+```
 
 
