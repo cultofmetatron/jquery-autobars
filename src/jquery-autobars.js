@@ -1,4 +1,5 @@
-/* this file is a basic helper utility for people
+/*
+ * this file is a basic helper utility for people
  * using handlebars.js. it allowes you to store several
  * handlebars templates seperated with
  *
@@ -9,7 +10,7 @@
  *
  * Created by Peter de Croos (Cultofmetatron)
  * blog.peterdecroos.com
- * /
+ */
 
 (function($) {
   methods = {
@@ -25,7 +26,7 @@
       var endToken = /<!--#\?end-->/;
       var END_TOKEN_SIZE = 12;
       //now we get the names of the partials
-      var data = data.split('\n').join('');;
+      var data = data.split('\n').join('');
       var templates = {};
       //first remove all white space charachters that are in groups > 2
       data = data.split(/\s{2,}/).join('');
