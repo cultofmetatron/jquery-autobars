@@ -3,8 +3,6 @@ jQuery Autobars
 
 A convenient jquery plugin for loading handlebars templates declared in script tags!
 
-This libary is ALPHA Software. Fork it, play with it and contribute
-if it seems useful to you!
 
 Usage
 ================
