@@ -56,7 +56,7 @@
       var pipe = [];//promise objects
       context.find('[type="text/x-handlebars-template"]').each(function(index, element) {
         var loadUrl = $(element).attr('src');
-        var name = loadUrl.match(/[a-zA-Z]+/);
+        var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
         //here we gather all our promises
         pipe.push($.get(loadUrl, function(data) {
           jQuery.handlebarTemplates[name] = Handlebars.compile(data);
