@@ -18,6 +18,19 @@
     initialize: function() {
 
     },
+    parseName:function(url) {
+      var split_url = url.split("/");
+      //get every past the last slash
+      var name = split_url[split_url.length-1];
+      //strip querystring
+      name = name.split("?")[0];
+      split_name = name.split(".");
+      if (split_name.length > 1) {
+        //strip extension
+        split_name = split_name.slice(0, -1);
+      }
+      return split_name.join(".");
+    },
     parsePartials:function(data){
       /* this function splits the partials */
 
@@ -56,7 +69,8 @@
       var pipe = [];//promise objects
       context.find('[type="text/x-handlebars-template"]').each(function(index, element) {
         var loadUrl = $(element).attr('src');
-        var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
+        //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
+        var name = methods.parseName(loadUrl);
         //here we gather all our promises
         pipe.push($.get(loadUrl, function(data) {
           jQuery.handlebarTemplates[name] = Handlebars.compile(data);
