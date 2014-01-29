@@ -20,7 +20,7 @@
     },
     parseName:function(url) {
       var split_url = url.split("/");
-      //get every past the last slash
+      //get everything past the last slash
       var name = split_url[split_url.length-1];
       //strip querystring
       name = name.split("?")[0];
