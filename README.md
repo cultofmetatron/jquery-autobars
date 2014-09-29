@@ -33,7 +33,7 @@ A partials file contains several handlebar template source files and are between
 Handlebars helper knows its a a partials file via a script tag with type
 
 ```html
-	<script src="/helper-templates.hbs" type="text/handlebar-partials"></script>
+	<script src="/helper-templates.hbs" type="text/x-handlebars-partial"></script>
 ```
 in this case the type="text/handlebar-partials" marks the file for additional parsing.
 
