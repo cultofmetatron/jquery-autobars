@@ -86,7 +86,7 @@
 		partials:  function(context) {
 			//we take the nodes and pull out partials
 			var pipe = [];//promise objects
-			context.find('[type="text/handlebar-partials"]').each(function(index, element) {
+			context.find('[type="text/x-handlebars-partial"]').each(function(index, element) {
 				//handlebarTemplates = Handlebars.compile($(element).html());
 				var loadUrl = $(element).attr('src');
 				//gather the promises
