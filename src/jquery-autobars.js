@@ -57,13 +57,14 @@
 				data = data.slice(endIndex + END_TOKEN_SIZE); //increment to the next size;
 				templates[name] = Handlebars.compile(source);
 			}
-			//load the, into the handlebarTemplates namespace;
+			// register partials for use within Handlebars templates
+			// for usage, see https://github.com/wycats/handlebars.js/#partials
 			for(key in templates) {
-				if (jQuery.handlebarTemplates[key] === undefined) {
-					//silently fails to load in a  new template if and older one exists;
-					jQuery.handlebarTemplates.partials[key] = templates[key];
-				}
+				methods.registerPartial(key, templates[key]);
 			}
+		},
+		registerPartial: function(key, partial) {
+			Handlebars.registerParial(key, partial);
 		},
 		mainTemplates: function(context) {
 			var pipe = [];//promise objects
