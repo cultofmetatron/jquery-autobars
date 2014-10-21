@@ -1,30 +1,28 @@
 <!DOCTYPE HTML>
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-  <title>jQuery AutoBars</title>
+  <title>jQuery AutoBars Example</title>
 
-  <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/src/jquery-autobars.js" type="text/javascript"></script>
-  <script src="/helper-templates.hbs" type="text/handlebar-partials"></script>
-  <script src="/main.hbs" type="text/x-handlebars-template"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="src/jquery-autobars.js" type="text/javascript"></script>
+  <script src="helper-templates.hbs" type="text/x-handlebars-partial"></script>
+  <script src="main.hbs" type="text/x-handlebars-template"></script>
   <script type="text/javascript">
-
     $(document).ready(function() {
       $(document).autoBars(function() {
-        console.log('it worked!!')
-        var $html = $.handlebarTemplates.partials.index({
-            message: "hello welcome to handlebar helper!!",
-            });
+        console.log('it worked!!');
+        var $html = $.handlebarTemplates['main']({
+            message: "Welcome to jQuery-autobars!"
+        });
         $('body').append($html);
       });
     })
   </script>
 </head>
 <body>
-  <h1 id="header">minimalisticly awesome</h1>
-  <p> minimalisticic templating on steroids</p>
-
+  <h1 id="header">Minimalistically awesome</h1>
+  <p>Minimalist templates on steroids</p>
 
 </body>
 
