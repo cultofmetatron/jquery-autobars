@@ -64,7 +64,7 @@
 			}
 		},
 		registerPartial: function(key, partial) {
-			Handlebars.registerParial(key, partial);
+			Handlebars.registerPartial(key, partial);
 		},
 		mainTemplates: function(context) {
 			var pipe = [];//promise objects
