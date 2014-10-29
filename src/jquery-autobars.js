@@ -69,7 +69,11 @@
       }
     },
     registerPartial: function (key, partial) {
-      Handlebars.registerPartial(key, partial);
+        if(typeof Handlebars.registerPartial() === 'function'){
+            Handlebars.registerPartial(key, partial);
+        } else {
+            $.handlebarTemplates.partials[key] = partial;
+        }
     },
     mainTemplates: function (context) {
       var pipe = [];//promise objects
