@@ -84,7 +84,7 @@
               url: loadUrl,
               dataType: 'text'
             }).done(function (data) {
-              jQuery.handlebarTemplates[name] = Handlebars.compile(data);
+              $.handlebarTemplates[name] = Handlebars.compile(data);
             })
           );
         });
@@ -121,11 +121,10 @@
 			options = {};
 		}
     //so we don't overwrite it
-		jQuery.handlebarTemplates = jQuery.handlebarTemplates || {};
-		jQuery.handlebarTemplates.partials =
-      jQuery.handlebarTemplates.partials || {};
-		var settings = $.extend({
-			loadHandlebars : false,
+		$.handlebarTemplates = $.handlebarTemplates || {};
+		$.handlebarTemplates.partials = $.handlebarTemplates.partials || {};
+		$.extend({
+			loadHandlebars : false
 		}, options);
 
 		// gather all the promises from the multiple async calls
