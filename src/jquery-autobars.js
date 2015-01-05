@@ -69,7 +69,7 @@
       }
     },
     registerPartial: function (key, partial) {
-        if(typeof Handlebars.registerPartial() === 'function'){
+        if(typeof Handlebars.registerPartial === 'function'){
             Handlebars.registerPartial(key, partial);
         } else {
             $.handlebarTemplates.partials[key] = partial;
