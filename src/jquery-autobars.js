@@ -71,11 +71,9 @@
     },
 
     registerPartial: function (key, partial) {
-      if(typeof Handlebars.registerPartial() === 'function'){
-        Handlebars.registerPartial(key, partial);
-      } else {
-        $.handlebarTemplates.partials[key] = partial;
-      }
+      // just invoke the partial function and get the
+      Handlebars.registerPartial(key, partial);
+      $.handlebarTemplates.partials[key] = partial;
     },
 
     mainTemplates: function (context) {
