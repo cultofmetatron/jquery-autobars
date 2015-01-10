@@ -69,46 +69,57 @@ jQuery autobars can be used to replace existing $(document).ready() calls to gua
 
 Example of using a document fragment
 ```javascript
-	var fragment = "
-	<script src="/lazyLoaded.hbs" type="text/x-handlebars-template"></script>
+var fragment = "
+<script src="/lazyLoaded.hbs" type="text/x-handlebars-template"></script>
 	"
-  var callback_function = function() {
-    var $html = $.handlebarTemplates.lazyLoaded({
-      message: "I was loaded from a document fragment!",
-    });
-    $('body').append($html);
-  }
-	$(fragment).autoBars({
-    callback: callback_function
+var callback_function = function() {
+  var $html = $.handlebarTemplates.lazyLoaded({
+    message: "I was loaded from a document fragment!",
   });
+  $('body').append($html);
+}
+$(fragment).autoBars({
+  callback: callback_function
+});
 ```
 
 Check the [example.html](example.html) for a complete running preview of what jQuery autobars can do
 
 
 ## Loading the handlebars templates from a list
-If you don't like to put the script directly in your DOM you have the
-option to specify a list of templates to be loaded for instance:
+If you don't like to set the script tags directly in your DOM you just have to specify a list of templates to be loaded for instance:
 
 ```
-      var template_list = [
-        'templates/test1.hbs',
-        'templates/test2.hbs',
-        'templates/test3.hbs',
-        'templates/test4.hbs',
-        'templates/test5.hbs'
-      ]
+var template_list = [
+  'templates/test1.hbs',
+  'templates/test2.hbs',
+  'templates/test3.hbs',
+  'templates/test4.hbs',
+  'templates/test5.hbs'
+]
 
-      var partial_list = [
-        'templates/partial1.hbs'
-      ]
+var partial_list = [
+  'templates/partial1.hbs'
+]
 
-      $(document).autoBars({
-        main_template_from_list: template_list,
-        partial_template_from_list: partial_list
-      });
+$(document).autoBars({
+  main_template_from_list: template_list,
+  partial_template_from_list: partial_list
+});
 
 ```
 
+NOTE: if the partial or main templates_from_list options are set the script tags in the
+DOM will be ingnored and will be loaded using the template list
 If you want to see an working example check the example2.html, please
 
+
+## Defaults plugin configuration
+```
+$.fn.autoBars.defaults = {
+  callback: $.noop,
+  partial_template_from_list: [],
+  main_template_from_list: []
+};
+
+```
