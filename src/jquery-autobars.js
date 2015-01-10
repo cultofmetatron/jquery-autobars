@@ -76,59 +76,97 @@
       $.handlebarTemplates.partials[key] = partial;
     },
 
-    mainTemplates: function (context) {
+    mainTemplates: function (context, options) {
       var pipe = [];//promise objects
-      context.find('[type="text/x-handlebars-template"]')
-      .each(function (index, element) {
-        var loadUrl = $(element).attr('src');
-        //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
-        var name = methods.parseName(loadUrl);
-        //here we gather all our promises
-        pipe.push(
-          $.ajax({
-            url: loadUrl,
-            dataType: 'text'
-          }).done(function (data) {
-            $.handlebarTemplates[name] = Handlebars.compile(data);
-          })
-        );
-      });
+
+      // if the array with templates is provided we are going to use it instead of
+      // reading the dom elements
+      if (options.main_template_from_list.length > 0) {
+        $.each(options.main_template_from_list, function(index, element){
+          var loadUrl = element;
+          //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
+          var name = methods.parseName(loadUrl);
+          //here we gather all our promises
+          pipe.push(
+            $.ajax({
+              url: loadUrl,
+              dataType: 'text'
+            }).done(function (data) {
+              $.handlebarTemplates[name] = Handlebars.compile(data);
+            })
+          );
+        });
+      } else {
+        context.find('[type="text/x-handlebars-template"]')
+        .each(function (index, element) {
+          var loadUrl = $(element).attr('src');
+          //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
+          var name = methods.parseName(loadUrl);
+          //here we gather all our promises
+          pipe.push(
+            $.ajax({
+              url: loadUrl,
+              dataType: 'text'
+            }).done(function (data) {
+              $.handlebarTemplates[name] = Handlebars.compile(data);
+            })
+          );
+        });
+      }
       return pipe;
     },
 
-    partials: function (context) {
+    partials: function (context, options) {
       //we take the nodes and pull out partials
       var pipe = [];//promise objects
-      context.find('[type="text/x-handlebars-partial"]')
-      .each(function (index, element) {
-        //handlebarTemplates = Handlebars.compile($(element).html());
-        var loadUrl = $(element).attr('src');
-        //gather the promises
-        pipe.push(
-          $.ajax({
-            url: loadUrl,
-            dataType: 'text'
-          }).done(function (data) {
-            //each pageload is performed asynchronously and so the data exists only in this
-            //context. here we scrub the input and use it;
-            methods.parsePartials(data);
-          })
-        );
-      });
+
+      if (options.partial_template_from_list.length > 0) {
+        $.each(options.partial_template_from_list, function(index, element){
+          var loadUrl = element;
+          //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
+          var name = methods.parseName(loadUrl);
+          //here we gather all our promises
+          pipe.push(
+            $.ajax({
+              url: loadUrl,
+              dataType: 'text'
+            }).done(function (data) {
+              methods.parsePartials(data);
+            })
+          );
+        });
+      } else {
+        context.find('[type="text/x-handlebars-partial"]')
+        .each(function (index, element) {
+          //handlebarTemplates = Handlebars.compile($(element).html());
+          var loadUrl = $(element).attr('src');
+          //gather the promises
+          pipe.push(
+            $.ajax({
+              url: loadUrl,
+              dataType: 'text'
+            }).done(function (data) {
+              //each pageload is performed asynchronously and so the data exists only in this
+              //context. here we scrub the input and use it;
+              methods.parsePartials(data);
+            })
+          );
+        });
+      }
       return pipe;
     }
   };
 
   $.fn.autoBars = function(params) {
-    var options = $.extend({}, $.fn.autoBars.dafaults, params);
+    var options = $.extend({}, $.fn.autoBars.defaults, params);
 
     //so we don't overwrite it
     $.handlebarTemplates = $.handlebarTemplates || {};
     $.handlebarTemplates.partials = $.handlebarTemplates.partials || {};
 
     // gather all the promises from the multiple async calls
-    var partialPromises   = methods.partials(this);
-    var templatesPromises = methods.mainTemplates(this);
+    var partialPromises   = methods.partials(this, options);
+    var templatesPromises = methods.mainTemplates(this, options);
     var promises = partialPromises.concat(templatesPromises);
 
     // we delay execution of the callback until all
@@ -140,11 +178,10 @@
     return this;
   };
 
-  $.fn.autoBars.dafaults = {
+  $.fn.autoBars.defaults = {
     callback: $.noop,
-    from_dom: true,
-    from_list: false,
-    template_list_array: []
+    partial_template_from_list: [],
+    main_template_from_list: []
   };
 })(jQuery);
 
