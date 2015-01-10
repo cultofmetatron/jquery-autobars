@@ -13,7 +13,7 @@ This plugin makes the distinction between partials files (which
 can hold multiple handlebars templates) and full templates which are one
 per file.
 
-Handlebar templates are loaded into `$.handlebarTemplates["compiled template"]`
+Handlebar templates are loaded into `$.handlebarTemplates["compiled template"] or if your template does not have spaces in the name $.handlebarTemplates.compiled_template`
 by way of the the script tag type attribute.
 
 ```html
@@ -53,7 +53,7 @@ Partials can be accessed from Handlebars templates using the following syntax
 
 jQuery autobars can be used to replace existing $(document).ready() calls to guarantee that all your templates are loaded, or you can call it later as necessary. You can also load templates from document fragments as needed!
 ```javascript
-	$(document).autoBars(function() {
+	$(document).autoBars(callback: function() {
 		/* you pass a callback in to perform work on the templates
 		becasuse handlebar helper is making multiple aynchrous requests
 		and it makes sure to not call this callback till all the necessary files
@@ -72,13 +72,43 @@ Example of using a document fragment
 	var fragment = "
 	<script src="/lazyLoaded.hbs" type="text/x-handlebars-template"></script>
 	"
-	$(fragment).autoBars(function() {
-        var $html = $.handlebarTemplates.lazyLoaded({
-            message: "I was loaded from a document fragment!",
-        });
-        $('body').append($html);
-      });
+  var callback_function = function() {
+    var $html = $.handlebarTemplates.lazyLoaded({
+      message: "I was loaded from a document fragment!",
+    });
+    $('body').append($html);
+  }
+	$(fragment).autoBars({
+    callback: callback_function
+  });
 ```
 
 Check the [example.html](example.html) for a complete running preview of what jQuery autobars can do
+
+
+## Loading the handlebars templates from a list
+If you don't like to put the script directly in your DOM you have the
+option to specify a list of templates to be loaded for instance:
+
+```
+      var template_list = [
+        'templates/test1.hbs',
+        'templates/test2.hbs',
+        'templates/test3.hbs',
+        'templates/test4.hbs',
+        'templates/test5.hbs'
+      ]
+
+      var partial_list = [
+        'templates/partial1.hbs'
+      ]
+
+      $(document).autoBars({
+        main_template_from_list: template_list,
+        partial_template_from_list: partial_list
+      });
+
+```
+
+If you want to see an working example check the example2.html, please
 
