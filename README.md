@@ -110,8 +110,8 @@ $(document).autoBars({
 ```
 
 NOTE: if the partial or main templates_from_list options are set the script tags in the
-DOM will be ingnored and will be loaded using the template list
-If you want to see an working example check the example2.html, please
+DOM will be ingnored and will be loaded using the template list instead
+If you want to see an example check the [example2.html](example2.html) file
 
 
 ## Defaults plugin configuration
