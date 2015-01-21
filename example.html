@@ -10,12 +10,16 @@
   <script src="main.hbs" type="text/x-handlebars-template"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      $(document).autoBars(function() {
+      var callback_function = function() {
         console.log('it worked!!');
         var $html = $.handlebarTemplates['main']({
-            message: "Welcome to jQuery-autobars!"
+            message: "a variable loaded from a partial compiled"
         });
         $('body').append($html);
+      };
+
+      $(document).autoBars({
+        callback: callback_function
       });
     })
   </script>
