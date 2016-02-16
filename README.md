@@ -85,7 +85,6 @@ $(fragment).autoBars({
 
 Check the [example.html](example.html) for a complete running preview of what jQuery autobars can do
 
-
 ## Loading the handlebars templates from a list
 If you don't like to set the script tags directly in your DOM you just have to specify a list of templates to be loaded for instance:
 
@@ -113,6 +112,24 @@ NOTE: if the partial or main templates_from_list options are set the script tags
 DOM will be ingnored and will be loaded using the template list instead
 If you want to see an example check the [example2.html](example2.html) file
 
+
+## Chaining methods to the jQuery autobars deferred object 
+
+When dealing with different JS modules you might want to chain your methods (that depend on the handlebars template) to the deferred object of jQuery autobars.
+This way you don't have to wrap your methods in `$(document).autoBars()` to ensure loaded templates which causes multiple asynchronous call for the templates.
+Instead chain your methods to the jQuery autobars deferred object `$.handlebarTemplates.deferred`
+
+Example of chaining methods to the deferred object of jQuery autobars
+
+```
+var chain() {
+ // your method that depend on handlebars template loaded by autobars
+}
+
+//This way ensure your methods are called after jQuery autobars have loaded your templates.
+$.handlebarTemplates.deferred = $.handlebarTemplates.deferred.then(chain, chain);
+
+```
 
 ## Defaults plugin configuration
 ```

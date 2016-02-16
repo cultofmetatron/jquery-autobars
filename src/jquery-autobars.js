@@ -172,7 +172,8 @@
     // we delay execution of the callback until all
     //  the promises are fulfilled!!
     if (typeof(options.callback) === 'function') {
-      $.when.apply(this, promises).done(options.callback);
+    	//Make the differed object accessible on page to chain multiple template-dependent methods
+    	$.handlebarTemplates.deferred = $.when.apply(this, promises).done(options.callback);
     }
     // return the original jquery object
     return this;
