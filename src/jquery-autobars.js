@@ -100,6 +100,16 @@
         context.find('[type="text/x-handlebars-template"]')
         .each(function (index, element) {
           var loadUrl = $(element).attr('src');
+          var hbsOptions = {};
+          
+          try {
+              hbsOptions = JSON.parse($(element).attr('options'));
+          }
+          
+          catch(e) {
+              hbsOptions = {};
+          }
+          
           //var name = loadUrl.match(/([^\/]+)(?=\.\w+$)/)[0];
           var name = methods.parseName(loadUrl);
           //here we gather all our promises
@@ -108,7 +118,7 @@
               url: loadUrl,
               dataType: 'text'
             }).done(function (data) {
-              $.handlebarTemplates[name] = Handlebars.compile(data);
+              $.handlebarTemplates[name] = Handlebars.compile(data, hbsOptions);
             })
           );
         });
@@ -172,8 +182,8 @@
     // we delay execution of the callback until all
     //  the promises are fulfilled!!
     if (typeof(options.callback) === 'function') {
-    	//Make the differed object accessible on page to chain multiple template-dependent methods
-    	$.handlebarTemplates.deferred = $.when.apply(this, promises).done(options.callback);
+        //Make the differed object accessible on page to chain multiple template-dependent methods
+        $.handlebarTemplates.deferred = $.when.apply(this, promises).done(options.callback);
     }
     // return the original jquery object
     return this;
